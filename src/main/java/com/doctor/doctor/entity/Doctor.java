@@ -8,10 +8,10 @@ import java.time.Instant;
 
 @Getter
 @Setter
-public class Patient {
+public class Doctor {
+
     @Id
     String id;
-    String medicalCardId;
     String name;
     String sureName;
     String phone;

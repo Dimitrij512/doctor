@@ -2,19 +2,19 @@ package com.doctor.doctor.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
 
 import java.time.Instant;
+import java.util.List;
 
 @Getter
 @Setter
-public class Patient {
-    @Id
+public class MedicalCard {
+
     String id;
-    String medicalCardId;
-    String name;
-    String sureName;
-    String phone;
+    String patientId;
+    String doctorId;
+    String dentalCardId;
+    List<String> doctorNoteIds;
     Instant createdDate;
     Instant updatedDate;
 }

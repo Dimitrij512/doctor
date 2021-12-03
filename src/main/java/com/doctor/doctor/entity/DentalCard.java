@@ -5,16 +5,16 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
 import java.time.Instant;
+import java.util.List;
 
 @Getter
 @Setter
-public class Patient {
+public class DentalCard {
+
     @Id
     String id;
     String medicalCardId;
-    String name;
-    String sureName;
-    String phone;
+    List<String> toothIds;
     Instant createdDate;
     Instant updatedDate;
 }

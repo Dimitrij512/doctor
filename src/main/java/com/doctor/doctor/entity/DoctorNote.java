@@ -8,13 +8,13 @@ import java.time.Instant;
 
 @Getter
 @Setter
-public class Patient {
+public class DoctorNote {
+
     @Id
     String id;
-    String medicalCardId;
-    String name;
-    String sureName;
-    String phone;
+    String doctorId;
+    String patientId;
+    String note;
     Instant createdDate;
     Instant updatedDate;
 }

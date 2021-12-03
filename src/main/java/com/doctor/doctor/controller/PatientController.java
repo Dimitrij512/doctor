@@ -8,7 +8,8 @@ import java.util.List;
 
 @RestController
 public class PatientController {
-    private PatientService patientService;
+
+    private final PatientService patientService;
 
     public PatientController(PatientService patientService) {
         this.patientService = patientService;
