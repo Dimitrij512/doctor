@@ -13,7 +13,7 @@ public class DoctorNote {
     @Id
     String id;
     String doctorId;
-    String patientId;
+    String medicalCardId;
     String note;
     Instant createdDate;
     Instant updatedDate;

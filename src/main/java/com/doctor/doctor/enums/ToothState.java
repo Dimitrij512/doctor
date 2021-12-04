@@ -9,7 +9,8 @@ public enum ToothState {
     SEAL("П"),
     MISSING("O"),
     CROWN("К"),
-    ROOT("R");
+    ROOT("R"),
+    HEALTHY("Здоровий");
 
     @Getter
     private final String stateName;

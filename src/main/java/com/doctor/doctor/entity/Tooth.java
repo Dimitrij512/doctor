@@ -15,6 +15,7 @@ public class Tooth {
 
     @Id
     String id;
+    String dentalCardId;
     ToothNumberEnum toothNumber;
     ToothPositionEnum position;
     ToothState toothState;

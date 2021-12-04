@@ -12,6 +12,7 @@ public class Patient {
     @Id
     String id;
     String medicalCardId;
+    String doctorId;
     String name;
     String sureName;
     String phone;
