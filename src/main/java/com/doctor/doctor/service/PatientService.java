@@ -1,6 +1,7 @@
 package com.doctor.doctor.service;
 
 import com.doctor.doctor.dto.Patient;
+import com.doctor.doctor.entity.PatientEntity;
 import com.doctor.doctor.exception.NotFoundException;
 import com.doctor.doctor.mapper.PatientMapper;
 import com.doctor.doctor.repository.PatientRepository;
@@ -34,7 +35,7 @@ public class PatientService {
             throw new NotFoundException(String.format("Doctor does not exist by id= %s", request.getDoctorId()));
         }
 
-        var patientCreatedEntity = patientRepository.save(PatientMapper.INSTANCE.toEntity(request));
+        PatientEntity patientCreatedEntity = patientRepository.save(PatientMapper.INSTANCE.toEntity(request));
 
         return setupService.setupAndSavePatient(patientCreatedEntity);
     }
@@ -45,10 +46,10 @@ public class PatientService {
             throw new NotFoundException(String.format("Doctor does not exist by id= %s", request.getDoctorId()));
         }
 
-        var patientFound = patientRepository.findById(patientId).orElseThrow(
+        PatientEntity patientFound = patientRepository.findById(patientId).orElseThrow(
                 () -> new NotFoundException(String.format("Patient does not exist by id= %s", request.getDoctorId())));
 
-        var patientCreatedEntity = patientRepository.save(PatientMapper.INSTANCE.merge(patientFound, request));
+        PatientEntity patientCreatedEntity = patientRepository.save(PatientMapper.INSTANCE.merge(patientFound, request));
 
         setupService.updateDoctorIdForMedicalCard(patientId, patientCreatedEntity.getDoctorId());
 
@@ -56,7 +57,7 @@ public class PatientService {
     }
 
     public Patient findById(String id) {
-        var patientEntity = patientRepository.findById(id)
+        PatientEntity patientEntity = patientRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(String.format("Not found patient by id = %s", id)));
 
         return PatientMapper.INSTANCE.toDto(patientEntity);

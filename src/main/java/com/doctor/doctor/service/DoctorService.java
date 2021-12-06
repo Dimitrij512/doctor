@@ -20,20 +20,20 @@ public class DoctorService {
     }
 
     public Doctor create(DoctorRequest doctorRequest) {
-        var entity = doctorRepository.save(DoctorMapper.INSTANCE.toEntity(doctorRequest));
+        DoctorEntity entity = doctorRepository.save(DoctorMapper.INSTANCE.toEntity(doctorRequest));
         return DoctorMapper.INSTANCE.toDto(entity);
     }
 
     public Doctor update(String doctorId, DoctorRequest doctorRequest) {
-        var doctorEntity = findEntityById(doctorId);
+        DoctorEntity doctorEntity = findEntityById(doctorId);
 
-        var entity = doctorRepository.save(DoctorMapper.INSTANCE.merge(doctorEntity, doctorRequest));
+        DoctorEntity doctorEntityUpdated = doctorRepository.save(DoctorMapper.INSTANCE.merge(doctorEntity, doctorRequest));
 
-        return DoctorMapper.INSTANCE.toDto(entity);
+        return DoctorMapper.INSTANCE.toDto(doctorEntityUpdated);
     }
 
     public Doctor findById(String id) {
-        var entity = findEntityById(id);
+        DoctorEntity entity = findEntityById(id);
 
         return DoctorMapper.INSTANCE.toDto(entity);
     }

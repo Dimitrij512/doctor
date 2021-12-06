@@ -2,8 +2,6 @@ package com.doctor.doctor.service;
 
 import com.doctor.doctor.dto.Tooth;
 import com.doctor.doctor.entity.ToothEntity;
-import com.doctor.doctor.enums.ToothNumberEnum;
-import com.doctor.doctor.enums.ToothPositionEnum;
 import com.doctor.doctor.enums.ToothState;
 import com.doctor.doctor.exception.NotFoundException;
 import com.doctor.doctor.mapper.ToothMapper;
@@ -23,17 +21,17 @@ public class ToothService {
 
     public Tooth update(String toothId, ToothState toothState, String comment) {
 
-        var tooth = findById(toothId);
+        Tooth tooth = findById(toothId);
         tooth.setToothState(toothState);
         tooth.setComment(comment);
 
-        var entity = toothRepository.save(ToothMapper.INSTANCE.toEntity(tooth));
+        ToothEntity entity = toothRepository.save(ToothMapper.INSTANCE.toEntity(tooth));
 
         return ToothMapper.INSTANCE.toDto(entity);
     }
 
     public Tooth findById(String toothId) {
-        var entity = toothRepository.findById(toothId)
+        ToothEntity entity = toothRepository.findById(toothId)
                 .orElseThrow(() -> new NotFoundException(String.format("Not found tooth by id= %s", toothId)));
         return ToothMapper.INSTANCE.toDto(entity);
     }

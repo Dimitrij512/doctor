@@ -6,7 +6,6 @@ import com.doctor.doctor.enums.ToothNumberEnum;
 import com.doctor.doctor.enums.ToothPositionEnum;
 import com.doctor.doctor.enums.ToothState;
 import com.doctor.doctor.mapper.PatientMapper;
-import com.doctor.doctor.repository.DoctorRepository;
 import com.doctor.doctor.repository.MedicalCardRepository;
 import com.doctor.doctor.repository.PatientRepository;
 import com.doctor.doctor.repository.ToothRepository;
@@ -40,7 +39,7 @@ public class SetupService {
         Optional.ofNullable(patientEntity.getDoctorId()).ifPresent(medicalCard::setDoctorId);
         medicalCard.setPatientId(patientEntity.getId());
 
-        var medicalCardCreated = medicalCardRepository.save(medicalCard);
+        MedicalCardEntity medicalCardCreated = medicalCardRepository.save(medicalCard);
         createTeethForMedicalCard(medicalCard.getId());
 
         patientEntity.setMedicalCardId(medicalCardCreated.getId());
@@ -49,7 +48,7 @@ public class SetupService {
     }
 
     public void updateDoctorIdForMedicalCard(String patientId, String doctorId) {
-        var medicalCard = medicalCardRepository.findMedicalCardByPatientId(patientId);
+        MedicalCardEntity medicalCard = medicalCardRepository.findMedicalCardByPatientId(patientId);
         if (Objects.nonNull(doctorId) && !doctorId.equals(medicalCard.getDoctorId())) {
             medicalCard.setDoctorId(doctorId);
             medicalCardRepository.save(medicalCard);
@@ -57,7 +56,7 @@ public class SetupService {
     }
 
     public void updateDoctorIdForPatient(String medicalCardId, String doctorId) {
-        var patientEntity = patientRepository.findPatientEntityByMedicalCardId(medicalCardId);
+        PatientEntity patientEntity = patientRepository.findPatientEntityByMedicalCardId(medicalCardId);
 
         if (Objects.nonNull(doctorId) && !doctorId.equals(patientEntity.getDoctorId())) {
             patientEntity.setDoctorId(doctorId);
@@ -65,7 +64,7 @@ public class SetupService {
         }
     }
 
-    private List<ToothEntity> createTeethForMedicalCard(String medicalCardId) {
+    private void createTeethForMedicalCard(String medicalCardId) {
 
         List<ToothEntity> listTeethLeftUpper = createDefaultTeeth(medicalCardId, ToothPositionEnum.LEFT_UPPER);
         List<ToothEntity> listTeethLeftBottom = createDefaultTeeth(medicalCardId, ToothPositionEnum.LEFT_BOTTOM);
@@ -76,7 +75,7 @@ public class SetupService {
                 .of(listTeethLeftUpper, listTeethLeftBottom, listTeethRightUpper, listTeethRightBottom)
                 .flatMap(Collection::stream).collect(Collectors.toList());
 
-        return toothRepository.saveAll(allTeeth);
+        toothRepository.saveAll(allTeeth);
     }
 
     private List<ToothEntity> createDefaultTeeth(String medicalCardId, ToothPositionEnum positionEnum) {
@@ -97,7 +96,7 @@ public class SetupService {
 
     @Transactional
     public void deletePatientById(String patientId) {
-        var medicalCard = medicalCardRepository.findMedicalCardByPatientId(patientId);
+        MedicalCardEntity medicalCard = medicalCardRepository.findMedicalCardByPatientId(patientId);
         toothRepository.deleteAllByMedicalCardId(medicalCard.getId());
         medicalCardRepository.delete(medicalCard);
         patientRepository.deleteById(patientId);
