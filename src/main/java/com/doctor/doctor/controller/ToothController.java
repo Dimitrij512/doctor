@@ -1,6 +1,6 @@
 package com.doctor.doctor.controller;
 
-import com.doctor.doctor.entity.Tooth;
+import com.doctor.doctor.dto.Tooth;
 import com.doctor.doctor.request.ToothUpdateRequest;
 import com.doctor.doctor.service.ToothService;
 import org.springframework.web.bind.annotation.*;

@@ -1,6 +1,7 @@
 package com.doctor.doctor.controller;
 
-import com.doctor.doctor.entity.Patient;
+import com.doctor.doctor.dto.Patient;
+import com.doctor.doctor.request.PatientRequest;
 import com.doctor.doctor.service.PatientService;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,9 +17,14 @@ public class PatientController {
         this.patientService = patientService;
     }
 
-    @PostMapping("/")
-    public Patient create(@RequestBody Patient patient) {
-        return patientService.create(patient);
+    @PostMapping
+    public Patient create(@RequestBody PatientRequest patientCreateRequest) {
+        return patientService.create(patientCreateRequest);
+    }
+
+    @PutMapping("/{id}")
+    public Patient update(@PathVariable String id, @RequestBody PatientRequest patientCreateRequest) {
+        return patientService.update(id, patientCreateRequest);
     }
 
     @GetMapping("/{id}")

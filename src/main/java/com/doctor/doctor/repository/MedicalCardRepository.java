@@ -1,14 +1,13 @@
 package com.doctor.doctor.repository;
 
-import com.doctor.doctor.entity.Doctor;
-import com.doctor.doctor.entity.MedicalCard;
+import com.doctor.doctor.entity.MedicalCardEntity;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface MedicalCardRepository extends MongoRepository<MedicalCard, String> {
+public interface MedicalCardRepository extends MongoRepository<MedicalCardEntity, String> {
 
-    List<MedicalCard> findMedicalCardsByDoctorId(String doctorId);
+    List<MedicalCardEntity> findMedicalCardsByDoctorId(String doctorId);
 
-    MedicalCard findMedicalCardByPatientId(String patientId);
+    MedicalCardEntity findMedicalCardByPatientId(String patientId);
 }

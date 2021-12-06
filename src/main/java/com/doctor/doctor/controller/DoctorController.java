@@ -1,6 +1,7 @@
 package com.doctor.doctor.controller;
 
-import com.doctor.doctor.entity.Doctor;
+import com.doctor.doctor.dto.Doctor;
+import com.doctor.doctor.request.DoctorRequest;
 import com.doctor.doctor.service.DoctorService;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +17,8 @@ public class DoctorController {
     }
 
     @PostMapping("/")
-    public Doctor save(@RequestBody Doctor patient) {
-        return doctorService.save(patient);
+    public Doctor save(@RequestBody DoctorRequest doctorRequest) {
+        return doctorService.save(doctorRequest);
     }
 
     @GetMapping("/{id}")
