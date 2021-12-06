@@ -49,7 +49,8 @@ public class PatientService {
         PatientEntity patientFound = patientRepository.findById(patientId).orElseThrow(
                 () -> new NotFoundException(String.format("Patient does not exist by id= %s", request.getDoctorId())));
 
-        PatientEntity patientCreatedEntity = patientRepository.save(PatientMapper.INSTANCE.merge(patientFound, request));
+        PatientEntity patientCreatedEntity = patientRepository
+                .save(PatientMapper.INSTANCE.merge(patientFound, request));
 
         setupService.updateDoctorIdForMedicalCard(patientId, patientCreatedEntity.getDoctorId());
 

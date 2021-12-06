@@ -27,7 +27,8 @@ public class DoctorService {
     public Doctor update(String doctorId, DoctorRequest doctorRequest) {
         DoctorEntity doctorEntity = findEntityById(doctorId);
 
-        DoctorEntity doctorEntityUpdated = doctorRepository.save(DoctorMapper.INSTANCE.merge(doctorEntity, doctorRequest));
+        DoctorEntity doctorEntityUpdated = doctorRepository
+                .save(DoctorMapper.INSTANCE.merge(doctorEntity, doctorRequest));
 
         return DoctorMapper.INSTANCE.toDto(doctorEntityUpdated);
     }
