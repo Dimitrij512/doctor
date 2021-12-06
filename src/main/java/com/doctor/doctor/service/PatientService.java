@@ -70,4 +70,8 @@ public class PatientService {
     public List<Patient> findAll() {
         return patientRepository.findAll().stream().map(PatientMapper.INSTANCE::toDto).collect(Collectors.toList());
     }
+
+    public void deleteById(String patientId) {
+        setupService.deletePatientById(patientId);
+    }
 }

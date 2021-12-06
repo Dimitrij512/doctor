@@ -94,4 +94,12 @@ public class SetupService {
 
         return toothList;
     }
+
+    @Transactional
+    public void deletePatientById(String patientId) {
+        var medicalCard = medicalCardRepository.findMedicalCardByPatientId(patientId);
+        toothRepository.deleteAllByMedicalCardId(medicalCard.getId());
+        medicalCardRepository.delete(medicalCard);
+        patientRepository.deleteById(patientId);
+    }
 }

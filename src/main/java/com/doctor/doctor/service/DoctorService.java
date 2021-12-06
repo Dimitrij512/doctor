@@ -1,6 +1,7 @@
 package com.doctor.doctor.service;
 
 import com.doctor.doctor.dto.Doctor;
+import com.doctor.doctor.entity.DoctorEntity;
 import com.doctor.doctor.exception.NotFoundException;
 import com.doctor.doctor.mapper.DoctorMapper;
 import com.doctor.doctor.repository.DoctorRepository;
@@ -18,14 +19,21 @@ public class DoctorService {
         this.doctorRepository = doctorRepository;
     }
 
-    public Doctor save(DoctorRequest doctorRequest) {
+    public Doctor create(DoctorRequest doctorRequest) {
         var entity = doctorRepository.save(DoctorMapper.INSTANCE.toEntity(doctorRequest));
         return DoctorMapper.INSTANCE.toDto(entity);
     }
 
+    public Doctor update(String doctorId, DoctorRequest doctorRequest) {
+        var doctorEntity = findEntityById(doctorId);
+
+        var entity = doctorRepository.save(DoctorMapper.INSTANCE.merge(doctorEntity, doctorRequest));
+
+        return DoctorMapper.INSTANCE.toDto(entity);
+    }
+
     public Doctor findById(String id) {
-        var entity = doctorRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(String.format("Not found doctor by id = %s", id)));
+        var entity = findEntityById(id);
 
         return DoctorMapper.INSTANCE.toDto(entity);
     }
@@ -36,6 +44,11 @@ public class DoctorService {
 
     public List<Doctor> findAll() {
         return doctorRepository.findAll().stream().map(DoctorMapper.INSTANCE::toDto).collect(Collectors.toList());
+    }
+
+    private DoctorEntity findEntityById(String id) {
+        return doctorRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(String.format("Not found doctor by id = %s", id)));
     }
 
 }

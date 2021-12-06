@@ -2,6 +2,7 @@ package com.doctor.doctor.service;
 
 import com.doctor.doctor.dto.MedicalCard;
 
+import com.doctor.doctor.entity.MedicalCardEntity;
 import com.doctor.doctor.exception.NotFoundException;
 import com.doctor.doctor.mapper.DoctorNoteMapper;
 import com.doctor.doctor.mapper.MedicalCardMapper;
@@ -34,10 +35,10 @@ public class MedicalCardService {
     }
 
     public void updateDoctorId(String medicalCardId, String doctorId) {
-        var medicalCard = findById(medicalCardId);
+        var medicalCard = findEntityById(medicalCardId);
         medicalCard.setDoctorId(doctorId);
 
-        var medicalCardUpdated = medicalCardRepository.save(MedicalCardMapper.INSTANCE.toEntity(medicalCard));
+        var medicalCardUpdated = medicalCardRepository.save(medicalCard);
 
         setupService.updateDoctorIdForPatient(medicalCardId, medicalCardUpdated.getDoctorId());
 
@@ -49,15 +50,14 @@ public class MedicalCardService {
         doctorNote.setId(UUID.randomUUID().toString());
         doctorNote.setCreatedDate(DateTime.now());
 
-        var medicalCard = findById(medicalCardId);
+        var medicalCard = findEntityById(medicalCardId);
         medicalCard.getDoctorNotes().add(doctorNote);
 
-        save(medicalCard);
+        medicalCardRepository.save(medicalCard);
     }
 
     public MedicalCard findById(String id) {
-        var entity = medicalCardRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(String.format("Medical card not found by id = %s", id)));
+        var entity = findEntityById(id);
 
         var medicalCardDto = MedicalCardMapper.INSTANCE.toDto(entity);
         medicalCardDto.setToothList(toothService.findAllByByMedicalCardId(medicalCardDto.getId()));
@@ -81,5 +81,10 @@ public class MedicalCardService {
 
             return medicalCard;
         }).collect(Collectors.toList());
+    }
+
+    private MedicalCardEntity findEntityById(String id) {
+        return medicalCardRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(String.format("Medical card not found by id = %s", id)));
     }
 }

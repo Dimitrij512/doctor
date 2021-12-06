@@ -8,4 +8,6 @@ import java.util.List;
 public interface ToothRepository extends MongoRepository<ToothEntity, String> {
 
     List<ToothEntity> findAllByMedicalCardId(String medicalCardId);
+
+    void deleteAllByMedicalCardId(String medicalCardId);
 }
