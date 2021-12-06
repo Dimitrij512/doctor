@@ -14,7 +14,6 @@
 	<name>doctorEntity</name>
 	<description>Doctor appointment application</description>
 	<properties>
-		<java.version>11</java.version>
 		<mapstruct.version>1.4.2.Final</mapstruct.version>
 		<springdoc-openapi.version>1.5.13</springdoc-openapi.version>
 	</properties>
