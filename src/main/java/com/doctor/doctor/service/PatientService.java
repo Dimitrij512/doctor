@@ -64,6 +64,11 @@ public class PatientService {
         return PatientMapper.INSTANCE.toDto(patientEntity);
     }
 
+    public List<Patient> findAllByIds(List<String> listId) {
+        return patientRepository.findByIdIn(listId).stream().map(PatientMapper.INSTANCE::toDto)
+                .collect(Collectors.toList());
+    }
+
     public List<Patient> findAllByDoctorId(String doctorId) {
         return patientRepository.findAllByDoctorId(doctorId).stream().map(PatientMapper.INSTANCE::toDto)
                 .collect(Collectors.toList());
