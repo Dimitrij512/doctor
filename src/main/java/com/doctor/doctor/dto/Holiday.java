@@ -2,10 +2,12 @@ package com.doctor.doctor.dto;
 
 import com.doctor.doctor.enums.HolidayType;
 import lombok.Builder;
+import lombok.Getter;
 
 import java.util.Date;
 
 @Builder
+@Getter
 public class Holiday {
 
     private final String doctorId;

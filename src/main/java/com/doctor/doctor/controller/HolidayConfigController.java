@@ -45,7 +45,7 @@ public class HolidayConfigController {
         return holidayConfigService.getById(id);
     }
 
-    @GetMapping("/{doctorId}")
+    @GetMapping("/doctor/{doctorId}")
     @Operation(summary = "Get list of holiday config")
     public List<HolidayConfig> getHolidayConfigsByDoctorId(@PathParam("doctorId") String doctorId) {
         return holidayConfigService.getByDoctorId(doctorId);
@@ -53,7 +53,7 @@ public class HolidayConfigController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete holiday config by id")
-    public void deleteById(@PathParam("id") String id) {
+    public void deleteById(@PathVariable String id) {
         holidayConfigService.delete(id);
     }
 

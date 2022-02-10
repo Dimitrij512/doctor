@@ -8,6 +8,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class Appointment {
+
     private String id;
     private String doctorId;
     private Patient patient;

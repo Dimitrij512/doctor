@@ -43,7 +43,7 @@ public class HolidayService {
         if (holidayConfig.getRepeatedType() == RepeatedType.NEVER) {
 
             if (holidayConfig.getEnd().after(startDay)) {
-                holidays.add(Holiday.builder().doctorId(holidayConfig.getId()).title(holidayConfig.getTitle())
+                holidays.add(Holiday.builder().doctorId(holidayConfig.getDoctorId()).title(holidayConfig.getTitle())
                         .type(holidayConfig.getType()).start(holidayConfig.getStart()).end(holidayConfig.getEnd())
                         .build());
             }
@@ -59,8 +59,8 @@ public class HolidayService {
         while (end.before(endDate)) {
 
             if (!isWeekend(start)) {
-                Holiday holiday = Holiday.builder().doctorId(holidayConfig.getId()).title(holidayConfig.getTitle())
-                        .type(holidayConfig.getType()).start(start).end(end).build();
+                Holiday holiday = Holiday.builder().doctorId(holidayConfig.getDoctorId())
+                        .title(holidayConfig.getTitle()).type(holidayConfig.getType()).start(start).end(end).build();
 
                 holidays.add(holiday);
             }
