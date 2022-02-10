@@ -10,9 +10,9 @@ import lombok.Setter;
 @Setter
 public class ToothEntity extends BaseEntity {
 
-    String medicalCardId;
-    ToothNumberEnum toothNumber;
-    ToothPositionEnum position;
-    ToothState toothState;
-    String comment;
+    private String medicalCardId;
+    private ToothNumberEnum toothNumber;
+    private ToothPositionEnum position;
+    private ToothState toothState;
+    private String comment;
 }

@@ -8,8 +8,8 @@ import org.joda.time.DateTime;
 @Setter
 public class DoctorNote {
 
-    String id;
-    String doctorId;
-    String note;
-    DateTime createdDate = DateTime.now();
+    private String id;
+    private String doctorId;
+    private String note;
+    private DateTime createdDate = DateTime.now();
 }

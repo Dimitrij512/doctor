@@ -7,9 +7,9 @@ import lombok.Setter;
 @Setter
 public class PatientEntity extends BaseEntity {
 
-    String medicalCardId;
-    String doctorId;
-    String name;
-    String sureName;
-    String phone;
+    private String medicalCardId;
+    private String doctorId;
+    private String name;
+    private String sureName;
+    private String phone;
 }

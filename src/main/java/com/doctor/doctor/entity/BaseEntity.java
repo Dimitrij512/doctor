@@ -14,7 +14,7 @@ import org.springframework.data.annotation.LastModifiedBy;
 public abstract class BaseEntity {
 
     @Id
-    String id;
+    private String id;
 
     @CreatedDate
     private DateTime createdDate;

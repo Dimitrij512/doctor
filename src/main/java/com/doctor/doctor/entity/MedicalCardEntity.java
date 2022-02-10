@@ -9,7 +9,7 @@ import java.util.List;
 @Setter
 public class MedicalCardEntity extends BaseEntity {
 
-    String patientId;
-    String doctorId;
-    List<DoctorNote> doctorNotes = new ArrayList<>();
+    private String patientId;
+    private String doctorId;
+    private List<DoctorNote> doctorNotes = new ArrayList<>();
 }
