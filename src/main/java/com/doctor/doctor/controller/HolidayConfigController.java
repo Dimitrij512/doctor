@@ -45,8 +45,14 @@ public class HolidayConfigController {
         return holidayConfigService.getById(id);
     }
 
+    @GetMapping("/global-holidays")
+    @Operation(summary = "Get global holiday configs")
+    public List<HolidayConfig> getHolidayConfigById() {
+        return holidayConfigService.findGlobalHolidays();
+    }
+
     @GetMapping("/doctor/{doctorId}")
-    @Operation(summary = "Get list of holiday config")
+    @Operation(summary = "Get list of holiday config by doctorId")
     public List<HolidayConfig> getHolidayConfigsByDoctorId(@PathParam("doctorId") String doctorId) {
         return holidayConfigService.getByDoctorId(doctorId);
     }

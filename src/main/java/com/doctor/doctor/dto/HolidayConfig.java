@@ -2,7 +2,6 @@ package com.doctor.doctor.dto;
 
 import com.doctor.doctor.enums.HolidayType;
 import com.doctor.doctor.enums.RepeatedType;
-import io.swagger.v3.oas.annotations.Hidden;
 import lombok.Data;
 
 import java.util.Date;
